@@ -1,3 +1,6 @@
+langchain
+langchain-openai
 yfinance
 pandas
-openai
+python-dotenv
+requests
