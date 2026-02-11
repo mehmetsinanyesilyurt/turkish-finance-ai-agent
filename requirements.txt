@@ -1,6 +1,4 @@
-langchain
-langchain-openai
+streamlit
 yfinance
 pandas
-python-dotenv
-requests
+plotly
