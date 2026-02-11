@@ -1,4 +1,3 @@
-cat <<EOF > run.sh
 #!/bin/zsh
 if [ ! -d "venv" ]; then
     echo "🚀 Sanal ortam oluşturuluyor..."
@@ -9,5 +8,3 @@ echo "📦 Kütüphaneler kontrol ediliyor..."
 pip install -r requirements.txt --quiet
 echo "🤖 Finans Ajanı başlatılıyor..."
 python3 main.py
-EOF
-chmod +x run.sh
