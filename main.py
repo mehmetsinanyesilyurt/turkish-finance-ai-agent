@@ -1,20 +1,28 @@
-# app.py içine eklenecek 'Ajan' entegrasyonu
-import finance_agent as fa # Senin harici dosyaların
-import report_generator as rg
-
-# Sidebar veya ana ekrana bir buton
-if st.button("🤖 Yapay Zeka Raporu Oluştur"):
-    with st.spinner("Analiz motoru çalışıyor..."):
-        # 1. Veriyi çek (main.py'daki mantık)
-        prices = fa.get_stock_data(asset) 
+# 🤖 FINANCE AGENT AI STRATEJİ MOTORU ENTEGRASYONU
+st.markdown("---")
+if st.button("🚀 Finance Agent Stratejisini Al"):
+    with st.spinner("Agent verileri derinlemesine analiz ediyor..."):
+        # 1. Ham Veriyi ve Volatiliteyi Çek (Geliştirilmiş Fonksiyon)
+        df_raw, vol_val = fa.get_stock_data(secim, period=periyot)
         
-        # 2. Analizi yap
-        analysis_results = fa.basic_analysis(prices)
-        
-        # 3. Raporu oluştur (Dosyaya yazmak yerine metin olarak al)
-        report_text = rg.generate_report(asset, analysis_results)
-        
-        # 4. Ekranda göster
-        st.markdown("---")
-        st.subheader("📊 AI Strateji Raporu")
-        st.info(report_text)
+        if df_raw is not None:
+            # 2. Gelişmiş Analiz Motorunu Çalıştır
+            # Bu fonksiyon artık sadece fiyat değil, RSI ve Trendi de analiz ediyor
+            analysis_results = fa.advanced_analysis(df_raw, vol_val)
+            
+            # 3. Profesyonel Raporu Oluştur (Markdown formatında)
+            report_text = rg.generate_report(secim, analysis_results)
+            
+            # 4. Ekranda Midas Stili Kart İçinde Göster
+            st.markdown("### 🕵️ Agent Strateji Raporu")
+            st.markdown(f'<div class="agent-card">{report_text}</div>', unsafe_allow_html=True)
+            
+            # 5. Opsiyonel: Raporu TXT/MD Olarak İndir
+            st.download_button(
+                label="📄 Raporu Dosya Olarak Kaydet",
+                data=report_text,
+                file_name=f"FinanceAgent_{secim}.md",
+                mime="text/markdown"
+            )
+        else:
+            st.error("Agent veri çekme aşamasında bir sorunla karşılaştı.")
