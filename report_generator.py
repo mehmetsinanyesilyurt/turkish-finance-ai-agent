@@ -33,6 +33,7 @@ def generate_report(symbol, analysis):
 | **RSI (14)** | {analysis['rsi']:.2f} | {"Aşırı Alım" if analysis['rsi'] > 70 else "Aşırı Satım" if analysis['rsi'] < 30 else "Nötr"} |
 | **Volatilite** | %{analysis['volatility']:.2f} | {analysis['risk_level']} Risk |
 | **Trend Gücü** | {analysis.get('trend_strength', 'Nötr')} | Momentum |
+| **Güven Skoru** | %{analysis.get('confidence', 0):.0f} | Model Tutarlılığı |
 
 ---
 
